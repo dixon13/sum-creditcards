@@ -8,13 +8,14 @@ function cardNumbersGreatestSum(array) {
   var sumCards = [];
   console.log("Input: ", array);
   var temp_array = [];
+  var temp = [];
 
   for (var i = 0; i < array.length; i++) {
     console.log("Removing hyphens and zeros...");
-    array[i] = array[i].replace(/[^1-9]/g, ''); // "123456789" Removing hyphens and zeros
-    array[i] = array[i].split('');
-    temp_array.push(array[i]);
-    console.log(array[i]);
+    temp[i] = array[i].replace(/[^1-9]/g, ''); // "123456789" Removing hyphens and zeros
+    temp[i] = temp[i].split('');
+    temp_array.push(temp[i]);
+    console.log(temp[i]);
     console.log("temp_array: ", temp_array);
   }
 
@@ -32,7 +33,29 @@ function cardNumbersGreatestSum(array) {
       }
     }
   }
-  return sumCards
+
+  function getLargestIndex(array) {
+    var largest = 0;
+    var index = 0;
+    for (var i = 0; i < array.length; i++) {
+      if (i === 0) {
+        largest = array[i];
+        index = i;
+      }
+      if (largest < array[i]) {
+        largest = array[i];
+        index = i;
+      }
+      if (largest === array[i]) {
+        index = i;
+      }
+    }
+    return index;
+  }
+
+  var card_data = getLargestIndex(sumCards);
+  // card_data is index of array for cards
+  return cards[card_data];
 }
 var returned = cardNumbersGreatestSum(cards);
 console.log("Returned: ", returned);
